@@ -1,0 +1,16 @@
+---
+# tasks file for docker
+- name: create image docker
+  docker_image:
+    name: devops
+    build:
+     path: /var/lib/jenkins/workspace/devops
+    source: build
+    state: present
+    force_source: true
+- name: run container docker
+  docker_container:
+    name: myapp-container
+    image: devops:latest
+    port:
+     - "4200:4201"
